@@ -2,88 +2,365 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Project Liberté - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Liberté</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --border: #e2e0d9;
+      --text: #1a1917;
+      --muted: #9c9a94;
+      --accent: #1a1917;
+      --tag-bg: #f0efe9;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      font-family: 'DM Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ── */
+    #login-screen {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      animation: fadeIn 0.4s ease;
     }
 
-    .login-container {
-      background: #fff;
-      padding: 30px 25px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      width: 300px;
-      box-sizing: border-box;
-    }
-
-    h1 { font-size: 20px; margin-bottom: 5px; color: #333; text-align: center; }
-    p.subtitle { font-size: 13px; color: #666; text-align: center; margin-bottom: 20px; }
-    label { display: block; font-size: 13px; color: #333; margin-bottom: 5px; }
-
-    input[type="password"] {
+    .login-box {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
+      max-width: 340px;
+    }
+
+    .login-box .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .login-box h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .login-box .tagline {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 4px;
+      font-family: 'DM Mono', monospace;
       font-size: 14px;
-      box-sizing: border-box;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
     }
 
-    input[type="password"]:focus { outline: none; border-color: #333; }
+    .field input:focus {
+      border-color: var(--text);
+    }
 
-    button {
+    .field input::placeholder {
+      color: var(--muted);
+    }
+
+    .btn {
       width: 100%;
-      padding: 10px;
-      background: #333;
+      margin-top: 14px;
+      padding: 12px;
+      background: var(--accent);
       color: #fff;
       border: none;
       border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       cursor: pointer;
-      font-size: 14px;
+      transition: opacity 0.15s;
     }
 
-    button:hover { background: #555; }
-    .error { color: red; font-size: 13px; margin-top: 10px; text-align: center; }
+    .btn:hover { opacity: 0.82; }
+
+    .error-msg {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #c0392b;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    /* ── HUB ── */
+    #hub-screen {
+      display: none;
+      min-height: 100vh;
+      padding: 48px 24px 80px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .hub-header {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .hub-header .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hub-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 720px;
+      margin: 0 auto 44px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── LINK CARDS ── */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.12s, border-color 0.12s;
+    }
+
+    .link-card:hover {
+      background: var(--tag-bg);
+      border-color: #ccc;
+    }
+
+    .link-card:first-child { border-radius: 4px 4px 2px 2px; }
+    .link-card:last-child  { border-radius: 2px 2px 4px 4px; }
+    .link-card:only-child  { border-radius: 4px; }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .link-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .link-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .link-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .link-arrow {
+      font-size: 14px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* ── MISC ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="login-container">
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <p class="eyebrow">Private Access</p>
     <h1>Vive la Liberté</h1>
-    <p class="subtitle">Long Live Freedom!</p>
+    <p class="tagline">Long live freedom.</p>
+    <div class="divider"></div>
+    <div class="field">
+      <label for="password">Passphrase</label>
+      <input type="password" id="password" placeholder="••••••••••••">
+    </div>
+    <button class="btn" onclick="submitPassword()">Enter</button>
+    <p class="error-msg" id="error"></p>
+  </div>
+</div>
 
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Enter password">
-
-    <button onclick="submitPassword()">Submit</button>
-    <div id="error" class="error"></div>
+<!-- ── HUB ── -->
+<div id="hub-screen">
+  <div class="hub-header">
+    <p class="eyebrow">Project Liberté</p>
+    <h2>The Links</h2>
   </div>
 
-  <script>
-    const CORRECT_PASSWORD = "letusbefree";
-    const REDIRECT_URL = "https://docs.google.com/forms/d/e/1FAIpQLScGPQZj48KzHZiX9LlBc7TVniGiaXvUEIx5hYamQl4BhH3mqg/viewform?usp=publish-editor";
+  <!-- SECTION 1 — swap titles and links as needed -->
+  <div class="section">
+    <p class="section-title">Games</p>
+    <div class="links-grid">
 
-    function submitPassword() {
-      const password = document.getElementById("password").value.trim();
-      const error = document.getElementById("error");
+      <a href="https://example.com" target="_blank" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">🎮</div>
+          <div>
+            <div class="link-name">Game One</div>
+            <div class="link-desc">Replace with your URL</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
 
-      if (password === CORRECT_PASSWORD) {
-        window.location.href = REDIRECT_URL;
-      } else {
-        error.textContent = "Try again later";
-      }
+      <a href="https://example.com" target="_blank" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">🕹️</div>
+          <div>
+            <div class="link-name">Game Two</div>
+            <div class="link-desc">Replace with your URL</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://example.com" target="_blank" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">🎯</div>
+          <div>
+            <div class="link-name">Game Three</div>
+            <div class="link-desc">Replace with your URL</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2 — add more sections by duplicating this block -->
+  <div class="section">
+    <p class="section-title">Proxies</p>
+    <div class="links-grid">
+
+      <a href="https://example.com" target="_blank" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">🔗</div>
+          <div>
+            <div class="link-name">Proxy One</div>
+            <div class="link-desc">Replace with your URL</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://example.com" target="_blank" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">🌐</div>
+          <div>
+            <div class="link-name">Proxy Two</div>
+            <div class="link-desc">Replace with your URL</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const CORRECT_PASSWORD = "letusbefree"; // ← change your password here
+
+  function submitPassword() {
+    const val = document.getElementById("password").value.trim();
+    const err = document.getElementById("error");
+
+    if (val === CORRECT_PASSWORD) {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("hub-screen").style.display = "block";
+    } else {
+      err.textContent = "Incorrect passphrase.";
+      document.getElementById("password").value = "";
     }
+  }
 
-    document.getElementById("password").addEventListener("keypress", (e) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("password").addEventListener("keydown", (e) => {
       if (e.key === "Enter") submitPassword();
     });
-  </script>
+  });
+</script>
 </body>
 </html>
