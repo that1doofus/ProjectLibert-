@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --bg: #f7f6f2;
       --surface: #ffffff;
@@ -17,14 +17,14 @@
       --accent: #1a1917;
       --tag-bg: #f0efe9;
     }
-
+ 
     body {
       font-family: 'DM Mono', monospace;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
     }
-
+ 
     /* ── LOGIN ── */
     #login-screen {
       display: flex;
@@ -35,12 +35,12 @@
       padding: 24px;
       animation: fadeIn 0.4s ease;
     }
-
+ 
     .login-box {
       width: 100%;
       max-width: 340px;
     }
-
+ 
     .login-box .eyebrow {
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -48,7 +48,7 @@
       color: var(--muted);
       margin-bottom: 10px;
     }
-
+ 
     .login-box h1 {
       font-family: 'DM Serif Display', serif;
       font-size: 32px;
@@ -57,20 +57,20 @@
       margin-bottom: 6px;
       color: var(--text);
     }
-
+ 
     .login-box .tagline {
       font-size: 12px;
       color: var(--muted);
       margin-bottom: 36px;
     }
-
+ 
     .divider {
       width: 32px;
       height: 1px;
       background: var(--border);
       margin-bottom: 28px;
     }
-
+ 
     .field label {
       display: block;
       font-size: 11px;
@@ -79,7 +79,7 @@
       color: var(--muted);
       margin-bottom: 8px;
     }
-
+ 
     .field input {
       width: 100%;
       padding: 12px 14px;
@@ -92,15 +92,15 @@
       outline: none;
       transition: border-color 0.15s;
     }
-
+ 
     .field input:focus {
       border-color: var(--text);
     }
-
+ 
     .field input::placeholder {
       color: var(--muted);
     }
-
+ 
     .btn {
       width: 100%;
       margin-top: 14px;
@@ -116,9 +116,9 @@
       cursor: pointer;
       transition: opacity 0.15s;
     }
-
+ 
     .btn:hover { opacity: 0.82; }
-
+ 
     .error-msg {
       margin-top: 12px;
       font-size: 12px;
@@ -126,7 +126,7 @@
       text-align: center;
       min-height: 18px;
     }
-
+ 
     /* ── HUB ── */
     #hub-screen {
       display: none;
@@ -134,14 +134,14 @@
       padding: 48px 24px 80px;
       animation: fadeIn 0.5s ease;
     }
-
+ 
     .hub-header {
       max-width: 720px;
       margin: 0 auto 48px;
       border-bottom: 1px solid var(--border);
       padding-bottom: 24px;
     }
-
+ 
     .hub-header .eyebrow {
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -149,19 +149,19 @@
       color: var(--muted);
       margin-bottom: 8px;
     }
-
+ 
     .hub-header h2 {
       font-family: 'DM Serif Display', serif;
       font-size: 28px;
       font-weight: 400;
     }
-
+ 
     /* ── SECTIONS ── */
     .section {
       max-width: 720px;
       margin: 0 auto 44px;
     }
-
+ 
     .section-title {
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -169,14 +169,14 @@
       color: var(--muted);
       margin-bottom: 14px;
     }
-
+ 
     /* ── LINK CARDS ── */
     .links-grid {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-
+ 
     .link-card {
       display: flex;
       align-items: center;
@@ -189,22 +189,22 @@
       color: var(--text);
       transition: background 0.12s, border-color 0.12s;
     }
-
+ 
     .link-card:hover {
       background: var(--tag-bg);
       border-color: #ccc;
     }
-
+ 
     .link-card:first-child { border-radius: 4px 4px 2px 2px; }
     .link-card:last-child  { border-radius: 2px 2px 4px 4px; }
     .link-card:only-child  { border-radius: 4px; }
-
+ 
     .link-left {
       display: flex;
       align-items: center;
       gap: 14px;
     }
-
+ 
     .link-icon {
       width: 32px;
       height: 32px;
@@ -217,24 +217,24 @@
       font-size: 15px;
       flex-shrink: 0;
     }
-
+ 
     .link-name {
       font-size: 14px;
       font-weight: 500;
     }
-
+ 
     .link-desc {
       font-size: 11px;
       color: var(--muted);
       margin-top: 2px;
     }
-
+ 
     .link-arrow {
       font-size: 14px;
       color: var(--muted);
       flex-shrink: 0;
     }
-
+ 
     /* ── MISC ── */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -243,7 +243,7 @@
   </style>
 </head>
 <body>
-
+ 
 <!-- ── LOGIN ── -->
 <div id="login-screen">
   <div class="login-box">
@@ -259,19 +259,19 @@
     <p class="error-msg" id="error"></p>
   </div>
 </div>
-
+ 
 <!-- ── HUB ── -->
 <div id="hub-screen">
   <div class="hub-header">
     <p class="eyebrow">Project Liberté</p>
     <h2>The Links</h2>
   </div>
-
+ 
   <!-- SECTION 1 — swap titles and links as needed -->
   <div class="section">
     <p class="section-title">Games</p>
     <div class="links-grid">
-
+ 
       <a href="https://example.com" target="_blank" class="link-card">
         <div class="link-left">
           <div class="link-icon">🎮</div>
@@ -282,7 +282,7 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
-
+ 
       <a href="https://example.com" target="_blank" class="link-card">
         <div class="link-left">
           <div class="link-icon">🕹️</div>
@@ -293,7 +293,7 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
-
+ 
       <a href="https://example.com" target="_blank" class="link-card">
         <div class="link-left">
           <div class="link-icon">🎯</div>
@@ -304,15 +304,15 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
-
+ 
     </div>
   </div>
-
+ 
   <!-- SECTION 2 — add more sections by duplicating this block -->
   <div class="section">
     <p class="section-title">Proxies</p>
     <div class="links-grid">
-
+ 
       <a href="https://example.com" target="_blank" class="link-card">
         <div class="link-left">
           <div class="link-icon">🔗</div>
@@ -323,7 +323,7 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
-
+ 
       <a href="https://example.com" target="_blank" class="link-card">
         <div class="link-left">
           <div class="link-icon">🌐</div>
@@ -334,19 +334,19 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
-
+ 
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <script>
   const CORRECT_PASSWORD = "letusbefree"; // ← change your password here
-
+ 
   function submitPassword() {
     const val = document.getElementById("password").value.trim();
     const err = document.getElementById("error");
-
+ 
     if (val === CORRECT_PASSWORD) {
       document.getElementById("login-screen").style.display = "none";
       document.getElementById("hub-screen").style.display = "block";
@@ -355,7 +355,7 @@
       document.getElementById("password").value = "";
     }
   }
-
+ 
   document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("password").addEventListener("keydown", (e) => {
       if (e.key === "Enter") submitPassword();
@@ -364,3 +364,4 @@
 </script>
 </body>
 </html>
+ 
